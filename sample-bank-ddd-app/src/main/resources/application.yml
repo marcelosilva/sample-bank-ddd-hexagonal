@@ -1,0 +1,21 @@
+#Customized parameters that could be overridden in the profile
+server:
+  port: 8080
+  servlet:
+    contextPath: "/api-bank-ddd"
+  error:
+    include-message: always
+    include-exception: true
+    include-stacktrace: always
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+    log-resolved-exception: true
+  application:
+    name: api-bank-ddd
+
+logging:
+  level:
+    root: INFO

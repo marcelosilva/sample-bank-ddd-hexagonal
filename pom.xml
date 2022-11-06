@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.marcelosilva.samples</groupId>
+    <artifactId>sample-bank-ddd</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>sample-bank-ddd-api</module>
+        <module>sample-bank-ddd-domain</module>
+        <module>sample-bank-ddd-app</module>
+        <module>sample-bank-ddd-data</module>
+        <module>sample-bank-ddd-test</module>
+    </modules>
+
+    <properties>
+        <sample-bank-ddd.project.version>1.0.0-SNAPSHOT</sample-bank-ddd.project.version>
+        <kotlin-maven-plugin.version>1.7.10</kotlin-maven-plugin.version>
+        <spring-boot-version>2.7.5</spring-boot-version>
+    </properties>
+
+</project>
