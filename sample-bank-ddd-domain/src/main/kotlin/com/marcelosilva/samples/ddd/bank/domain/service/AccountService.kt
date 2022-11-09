@@ -1,5 +1,7 @@
 package com.marcelosilva.samples.ddd.bank.domain.service
 
+import com.marcelosilva.samples.ddd.bank.domain.exception.AccountException
+import com.marcelosilva.samples.ddd.bank.domain.exception.AccountExceptionErrorCause
 import com.marcelosilva.samples.ddd.bank.domain.model.aggregate.Account
 import com.marcelosilva.samples.ddd.bank.domain.model.aggregate.AccountId
 import com.marcelosilva.samples.ddd.bank.domain.port.AccountRepository
@@ -17,6 +19,9 @@ class AccountService(
     }
 
     suspend fun findById(accountId: AccountId): Account {
-        return accountRepository.findById(accountId)
+        return accountRepository.findById(accountId) ?: throw AccountException(
+            accountId,
+            AccountExceptionErrorCause.NOT_FOUND
+        )
     }
 }

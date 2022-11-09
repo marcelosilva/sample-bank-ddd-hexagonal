@@ -73,6 +73,11 @@ data class AccountId(
 data class AccountBalance(
     private var funds: BigDecimal
 ) {
+
+    fun funds() : BigDecimal {
+        return funds
+    }
+
     fun hasSufficientFundsComparingAmount(amountToCompare: BigDecimal): Boolean {
         return funds >= amountToCompare
     }
