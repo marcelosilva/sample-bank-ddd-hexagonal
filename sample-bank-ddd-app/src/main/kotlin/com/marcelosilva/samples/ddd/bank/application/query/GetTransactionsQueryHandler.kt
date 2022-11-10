@@ -1,39 +1,29 @@
 package com.marcelosilva.samples.ddd.bank.application.query
 
 import com.marcelosilva.samples.ddd.bank.application.dto.TransactionDto
+import com.marcelosilva.samples.ddd.bank.domain.model.aggregate.AccountId
+import com.marcelosilva.samples.ddd.bank.domain.service.TransactionService
 import com.marcelosilva.samples.ddd.common.application.query.QueryHandler
 import com.marcelosilva.samples.ddd.common.application.query.QueryResponse
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import org.springframework.stereotype.Component
-import java.math.BigDecimal
 import java.util.UUID
 
 
 @Component
-class GetTransactionsQueryHandler : QueryHandler<GetTransactionsQuery, GetTransactionsQueryResponse> {
+open class GetTransactionsQueryHandler(
+    private val transactionService: TransactionService
+) : QueryHandler<GetTransactionsQuery, GetTransactionsQueryResponse> {
 
-    override suspend fun execute(query: GetTransactionsQuery): GetTransactionsQueryResponse = coroutineScope {
-        val response: Deferred<GetTransactionsQueryResponse> = async {
-            GetTransactionsQueryResponse(
-                listOf(
-                    TransactionDto(UUID.randomUUID().toString(), BigDecimal("5000")),
-                    TransactionDto(UUID.randomUUID().toString(), BigDecimal("4000")),
-                    TransactionDto(UUID.randomUUID().toString(), BigDecimal("1000"))
-                )
-            )
-        }
-        response.await()
-    }
-
-    override fun executeSync(query: GetTransactionsQuery): GetTransactionsQueryResponse {
+    override suspend fun execute(query: GetTransactionsQuery): GetTransactionsQueryResponse {
+        val transactions = transactionService.findByAccountId(AccountId(UUID.fromString(query.accountId)))
         return GetTransactionsQueryResponse(
-            listOf(
-                TransactionDto(UUID.randomUUID().toString(), BigDecimal("5000")),
-                TransactionDto(UUID.randomUUID().toString(), BigDecimal("4000")),
-                TransactionDto(UUID.randomUUID().toString(), BigDecimal("1000"))
-            )
+            transactions.map {
+                TransactionDto(
+                    id = it.id().id.toString(),
+                    amount = it.amount().amount,
+                    description = it.description().description
+                )
+            }
         )
     }
 }

@@ -13,7 +13,7 @@ import java.math.BigDecimal
 import java.util.UUID
 
 class Account(
-    private val id: AccountId,
+    val id: AccountId,
     private val balance: AccountBalance,
 ) : AggregateRoot() {
 

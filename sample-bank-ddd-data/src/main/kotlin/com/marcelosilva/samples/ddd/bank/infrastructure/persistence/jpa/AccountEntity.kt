@@ -6,8 +6,8 @@ import java.math.BigDecimal
 import java.util.UUID
 
 @Table("account")
-open class AccountEntity {
+open class AccountEntity(
     @Id
-    var id: UUID? = null
-    var balance: BigDecimal? = null
-}
+    open var id: UUID? = null,
+    open var balance: BigDecimal? = null
+)

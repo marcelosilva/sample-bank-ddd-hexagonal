@@ -5,10 +5,10 @@ import com.marcelosilva.samples.ddd.bank.domain.processor.LockAccountProcessor
 import com.marcelosilva.samples.ddd.bank.domain.processor.WithdrawProcessor
 import com.marcelosilva.samples.ddd.bank.domain.service.AccountService
 import com.marcelosilva.samples.ddd.common.application.command.CommandBus
-import org.springframework.stereotype.Service
+import com.marcelosilva.samples.ddd.common.domain.service.DomainService
 import java.util.UUID
 
-@Service
+@DomainService
 class WithdrawCommandHandler(
     private val accountService: AccountService,
     private val withdrawProcessor: WithdrawProcessor,
