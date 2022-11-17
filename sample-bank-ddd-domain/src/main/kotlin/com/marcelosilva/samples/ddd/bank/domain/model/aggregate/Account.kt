@@ -13,7 +13,7 @@ import java.math.BigDecimal
 import java.util.UUID
 
 class Account(
-    private val id: AccountId,
+    val id: AccountId,
     private val balance: AccountBalance,
 ) : AggregateRoot() {
 
@@ -73,6 +73,11 @@ data class AccountId(
 data class AccountBalance(
     private var funds: BigDecimal
 ) {
+
+    fun funds() : BigDecimal {
+        return funds
+    }
+
     fun hasSufficientFundsComparingAmount(amountToCompare: BigDecimal): Boolean {
         return funds >= amountToCompare
     }

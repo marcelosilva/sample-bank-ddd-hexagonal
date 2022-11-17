@@ -2,11 +2,11 @@ package com.marcelosilva.samples.ddd.bank.infrastructure.service
 
 import com.marcelosilva.samples.ddd.common.domain.AggregateRoot
 import com.marcelosilva.samples.ddd.common.domain.event.DomainEventDispatcher
+import com.marcelosilva.samples.ddd.common.domain.service.DomainService
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
-import org.springframework.stereotype.Service
 
-@Service
+@DomainService
 class DomainEventAdapter(
     private val applicationEventPublisher: ApplicationEventPublisher
 ) : DomainEventDispatcher {
